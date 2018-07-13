@@ -16,6 +16,7 @@ export default function(source, decoder) {
 function Dbf(source, decoder, head, body) {
   this._source = source;
   this._decode = decoder.decode.bind(decoder);
+  this.recordCount = head.getUint32(4, true);
   this._recordLength = head.getUint16(10, true);
   this._fields = [];
   for (var n = 0; body.getUint8(n) !== 0x0d; n += 32) {
